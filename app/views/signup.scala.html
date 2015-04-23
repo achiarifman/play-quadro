@@ -1,0 +1,46 @@
+@(form: Form[(String,String)], errorMessage : String)(implicit flash: Flash)
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>Sign Up</title>
+        <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/main.css")">
+        <link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
+
+    </head>
+    <body>
+
+    @helper.form(routes.Application.createUser) {
+
+        <h1>Sign Up</h1>
+
+        @form.globalError.map { error =>
+            <p class="error">
+                @error.message
+            </p>
+        }
+
+        @flash.get("success").map { message =>
+            <p class="success">
+                @message
+            </p>
+        }
+
+        <p>
+            <input type="email" name="email" placeholder="Email" id="email" value="@form("email").value">
+        </p>
+        <p>
+            <input type="password" name="password" id="password" placeholder="Password">
+        </p>
+        <p>
+            <button type="submit" id="loginbutton">Sign Up</button>
+        </p>
+
+        <p>
+            @errorMessage
+        </p>
+
+    }
+
+    </body>
+</html>

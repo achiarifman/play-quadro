@@ -1,0 +1,25 @@
+@(message : String,channelsList : List[models.entity.Channel])
+
+@main("Channels") {
+
+    <h1>@message</h1>
+
+    <ul>
+    @channelsList.map { channel =>
+        <li>@channel.name</li> <a href="@routes.Admin.editChannel(channel.id)">Edit</a>
+    }
+
+    </ul>
+
+    <h2>Create new Channel:</h2>
+
+    <form action="@routes.Admin.createChannelForm()">
+        <table style="width:300px">
+            <tr>
+                <td> <button>Create New Channel</button> </td>
+            </tr>
+        </table>
+
+    </form>
+
+}

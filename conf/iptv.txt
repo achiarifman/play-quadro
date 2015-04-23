@@ -1,0 +1,8 @@
+https://sslhls.m6tv.cdn.sfr.net/hls-live/livepkgr/_definst_/m6_hls_aes/m6_hls_aes_856.m3u8
+http://frlive.artestras.cshls.lldns.net/artestras/contrib/frlive/frlive_925.m3u8
+eurosport: http://esioslive6-i.akamaihd.net/hls/live/202874/AL_P_ESP1_INTER_ENG/playlist_1000.m3u8
+CTV Yorkton (Canada): http://198.179.31.198/live/2053.high.stream/2053.high.stream/index.m3u8
+BBC Sport: http://93.184.221.133/00573D/1104/1104-0.m3u8
+$$ british eurosport: http://93.184.221.133/00573D/1210/1210-0.m3u8
+ABC news: http://abclive.abcnews.com/i/abc_live4@136330/index_1200_av-b.m3u8
+national gegraphic hd: http://103.242.13.67:5000/nn_live.ts?id=nationalgeographic-m-h

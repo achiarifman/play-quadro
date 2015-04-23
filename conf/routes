@@ -1,0 +1,36 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+# Admin apis
+
+GET         /admin/epg/pull              controllers.Admin.epgPull
+
+POST        /admin/channel/new           controllers.Admin.createChannelSubmit
+
+GET         /admin/channel/create        controllers.Admin.createChannelForm
+
+GET         /admin/channel/edit          controllers.Admin.editChannel(id : String)
+
+POST        /admin/channel/edit           controllers.Admin.editChannelSubmit(id : String)
+
+GET         /admin/channels              controllers.Admin.allChannels
+
+POST        /admin/callback              controllers.Admin.transcoderCallback
+
+# Home page
+GET         /                            controllers.Application.index
+
+GET         /login                       controllers.Application.login
+POST        /login                       controllers.Application.authenticate
+GET         /logout                      controllers.Application.logout
+GET         /signup                      controllers.Application.signup
+POST        /createUser                  controllers.Application.createUser
+GET         /account                     controllers.Application.getUserDetails
+
+# Map static resources from the /public folder to the /assets URL path
+GET         /assets/*file                controllers.Assets.at(path="/public", file)
+
+GET         /vod                         controllers.Application.vod(programmeId : String, operation : String)
+
+GET         /live                        controllers.Application.live(channelNumber: String)

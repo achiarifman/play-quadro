@@ -1,0 +1,74 @@
+@(form: Form[models.json.ChannelJson],id : String,message : String)(implicit flash: Flash)
+
+<!DOCTYPE html>
+<html>
+<head lang="en">
+  <meta charset="UTF-8">
+  <title></title>
+</head>
+<body>
+    @helper.form(routes.Admin.editChannelSubmit(id)) {
+
+        <h1>Edit Channel</h1>
+
+        @form.globalError.map { error =>
+            <p class="error">
+                @error.message
+            </p>
+        }
+
+        @flash.get("success").map { message =>
+            <p class="success">
+                @message
+            </p>
+        }
+        <table style="width:300px">
+            <tr>
+                <td> Id: @id
+                </td>
+            </tr>
+            <tr>
+                <td> Name: <input name="name"  type="text" value="@form("name").value">
+                        @*Name: @helper.inputText(form("name"),'_help -> "")*@
+                </td>
+            </tr>
+            <tr>
+                <td> Number: <input name="number" type="number" value="@form("number").value"> </td>
+            </tr>
+            <tr>
+                <td> EpgId: <input name="epgId" type="text" value="@form("epgId").value"> </td>
+            </tr>
+            <tr>
+                <td> @helper.checkbox(form("recordingEnable"), '_help -> "", '_name -> "", '_text -> "Enable Recording:") </td>
+            </tr>
+            <tr>
+                <td> Url: <input name="url" type="text" value="@form("url").value"> </td>
+            </tr>
+            <tr>
+                <td> Transcoder Url: <input name="transcoderUrl" type="text" value="@form("transcoderUrl").value"> </td>
+            </tr>
+            <tr>
+                <td> Goal Price: <input name="goalPrice" type="number" value="@form("goalPrice").value"> </td>
+            </tr>
+            <tr>
+                <td> Min. Price: <input name="minPrice" type="number" value="@form("minPrice").value"> </td>
+            </tr>
+            <tr>
+                <td>Ads:
+                @for(i <- 0 to 5){
+                    @defining(i) { count =>
+                      @helper.inputText(form("ads[" + count + "]"),args = '_value -> i)
+                    }
+                }
+            </td>
+            </tr>
+
+
+            <tr>
+                <td> <button>Edit Channel</button> </td>
+            </tr>
+        </table>
+
+    }
+</body>
+</html>
