@@ -43,7 +43,7 @@ object XmltvToProgrammeService {
     val epgIdToChannelMap = allSavedChannels.map(channel => (channel.epgId,channel)).toMap
     val programmesTuples = filterdPrograms.map(programme => {
       val channel = epgIdToChannelMap.get(programme.channelEpgId)
-      val priceHolder = PriceHolder(channel.get.goalPrice,channel.get.minPrice)
+      val priceHolder = PriceHolder(channel.get.goalPrice.getOrElse(0.0),channel.get.minPrice.getOrElse(0.0))
       (programme,priceHolder)
     } )
     ProgrammeDao.saveNewProgrammes(programmesTuples.toList)

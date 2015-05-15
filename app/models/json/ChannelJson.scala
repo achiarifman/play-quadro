@@ -10,10 +10,10 @@ case class ChannelJson(name : String,
                        epgId : String,
                        recordingEnable : Boolean,
                        url : String,
-                       transcoderUrl : String,
+                       transcoderUrl : Option[String],
                        ads : List[String],
-                       val goalPrice : BigDecimal,
-                       val minPrice : BigDecimal
+                       val goalPrice : Option[BigDecimal],
+                       val minPrice : Option[BigDecimal]
                         ) {
 
 }

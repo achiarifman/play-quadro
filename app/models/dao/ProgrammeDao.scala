@@ -42,7 +42,7 @@ object ProgrammeDao extends BaseDao{
   def updateProgrammeUrl(id : String, url : String, priceHolder: PriceHolder) = {
     transactional {
       val pMap = new MutableEntityMap[Programme]()
-      pMap.put(_.url)(url)
+      pMap.put(_.recordedUrl)(url)
       pMap.put(_.isRecorded)(true)
       pMap.put(_.goalPrice)(priceHolder.goalPrice)
       pMap.put(_.goalPrice)(priceHolder.price)

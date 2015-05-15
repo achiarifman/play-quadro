@@ -1,10 +1,14 @@
 package models.actors
 
+import java.io.File
+
 import akka.actor.Actor
 import models.dao.ChannelDao
 import models.message.PullEpgMessage
 import models.service.XmltvToProgrammeService
+import models.utils.PropsConsts
 import play.api.Logger
+import play.api.Play._
 
 
 /**
@@ -12,7 +16,8 @@ import play.api.Logger
  */
 class EpgActor extends Actor{
 
-  val xmltvFile = "/Users/barcelona/Dropbox/Public/epg/EPGdata.xml"
+  val DROPBOX_PATH = current.configuration.getString(PropsConsts.DROPBOX_PATH).getOrElse("/Users/barcelona/Dropbox/Public/")
+  val xmltvFile = DROPBOX_PATH + "epg" + File.separator + "EPGdata.xml"
 
   override def receive: Receive = {
 

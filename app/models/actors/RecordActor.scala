@@ -39,7 +39,7 @@ class RecordActor extends Actor{
       val channel = channelsResult.head
       val recordInfo = RecordInfo(channel.url,message.duration,channel.name,channel.ads,CALLBACK_URL,message.id)
       val data = recordInfo.toJson
-      val req = url(channel.transcoderUrl + ":8080" + RECORD_PATH).setContentType("application/json", "UTF-8").
+      val req = url(channel.transcoderUrl.getOrElse("http://127.0.0.1") + ":8080" + RECORD_PATH).setContentType("application/json", "UTF-8").
         addHeader("Accept","application/json; charset=UTF-8") << data.toString()
       val response = Http(req.POST OK as.Response(r => r))
       Await.result(response, 15 seconds)

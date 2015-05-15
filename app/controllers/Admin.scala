@@ -33,8 +33,8 @@ object Admin extends Controller with Secured{
       val channelList = ChannelDao.getChannelByEpgId(programe.get.channelEpgId)
       val channelOption = channelList.headOption
       if(channelOption.isDefined)
-      ProgrammeDao.updateProgrammeUrl(callbackMedia.programmeId,callbackMedia.mediaUrl,PriceHolder(channelOption.get.goalPrice,
-        channelOption.get.minPrice))
+      ProgrammeDao.updateProgrammeUrl(callbackMedia.programmeId,callbackMedia.mediaUrl,PriceHolder(channelOption.get.goalPrice.getOrElse(0.0),
+        channelOption.get.minPrice.getOrElse(0.0)))
     }
     Ok
   }
@@ -54,6 +54,7 @@ object Admin extends Controller with Secured{
         formWithErrors => BadRequest(views.html.admin.channels(formWithErrors.toString, ChannelDao.getAllChannels)),
         channel => {
           ChannelDao.saveNewChannel(channel.copy(ads = channel.ads.filter(!_.isEmpty)))
+          Actors.epgActor ! PullEpgMessage
           getChannels("Channel Added")
         }
       )
@@ -85,6 +86,7 @@ object Admin extends Controller with Secured{
         formWithErrors => BadRequest(views.html.admin.channels(formWithErrors.toString, ChannelDao.getAllChannels)),
         channel => {
           ChannelDao.updateChannel(id, channel.copy(ads = channel.ads.filter(!_.isEmpty)))
+          Actors.epgActor ! PullEpgMessage
           getChannels("Channel Edited")
         }
       )
@@ -102,10 +104,10 @@ object Admin extends Controller with Secured{
       "epgId" -> text,
       "recordingEnable" -> boolean,
       "url" -> text,
-      "transcoderUrl" -> text,
+      "transcoderUrl" -> optional(text),
       "ads" -> list(text),
-      "goalPrice" -> bigDecimal,
-      "minPrice" -> bigDecimal
+      "goalPrice" -> optional(bigDecimal),
+      "minPrice" -> optional(bigDecimal)
     )(ChannelJson.apply)(ChannelJson.unapply)
   }
 

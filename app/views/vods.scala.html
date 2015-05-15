@@ -113,7 +113,7 @@
                             <td>
                                 @if(playingVod.isDefined){
                                 <video width="452" height="298" controls autoplay>
-                                    <source src="@playingVod.get.url" type="application/x-mpegURL">
+                                    <source src="@playingVod.get.recordedUrl" type="video/mp4">
                                 </video>   }
                             </td>
                         </tr>

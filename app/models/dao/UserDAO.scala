@@ -64,7 +64,7 @@ object UserDAO extends BaseDao{
     transactional{
       val navigator = paginatedQuery {
         (entity: User) =>
-          where((entity.programmesList.size :> 0)) select (entity) orderBy (entity.username)
+          where(entity.programmesList isNotNull) select (entity) orderBy (entity.username)
       }.navigator(50)
       navigator
     }

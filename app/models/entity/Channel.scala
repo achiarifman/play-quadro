@@ -12,10 +12,10 @@ case class Channel(val id : String,
               val epgId : String,
               val recordingEnable : Boolean,
               val url : String,
-              val transcoderUrl : String,
+              val transcoderUrl : Option[String],
               val ads : List[String],
-              val goalPrice : BigDecimal,
-              val minPrice : BigDecimal
+              val goalPrice : Option[BigDecimal],
+              val minPrice : Option[BigDecimal]
 ) extends EntityWithCustomID[String]{
 
 }
