@@ -64,7 +64,7 @@ object Application extends Controller with Secured{
   }
 
   def live(channelNumber: String) = withAuth { username => implicit request =>
-    val channels = ChannelDao.getAllChannels
+    val channels = ChannelDao.getAllChannels.sortBy(_.number)
     val requestedChannel = channels.find(p => p.number.toString.equals(channelNumber)).getOrElse(channels.head)
     val duration = new FiniteDuration(3,DAYS)
     val programmeList = ProgrammeDao.getProgramsFromByEpgId(requestedChannel.epgId,System.currentTimeMillis() - duration.toMillis)

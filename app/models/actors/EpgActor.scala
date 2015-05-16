@@ -3,7 +3,7 @@ package models.actors
 import java.io.File
 
 import akka.actor.Actor
-import models.dao.ChannelDao
+import models.dao.{ProgrammeDao, ChannelDao}
 import models.message.PullEpgMessage
 import models.service.XmltvToProgrammeService
 import models.utils.PropsConsts
@@ -26,13 +26,14 @@ class EpgActor extends Actor{
 
   def pullEpg() = {
 
-    //we need to pull the epg from the epg server
-    //.....
-    val allChannels = ChannelDao.getAllChannels
-    Logger.info("Got epg pull message, pulling the Epg")
-   /* allChannels.map(c => {
 
-    })*/
+    val allChannels = ChannelDao.getAllChannels
+
+    Logger.info("Deleting future epg before fetching new once")
+    ProgrammeDao.deleteFutureProgrammes(System.currentTimeMillis() + GMT_DIFF + FOUR_HOURS)
+    Logger.info("finish to delete future epg before fetching")
+
+    Logger.info("Got epg pull message, pulling the Epg")
     XmltvToProgrammeService.mapToProgramme(xmltvFile)
     Logger.info("Finish to pull the Epg")
 

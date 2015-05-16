@@ -122,7 +122,7 @@ object Admin extends Controller with Secured{
     username match {
 
       case "admin" => true
-      case _ => false//BadRequest(html.signup(signUpForm,"User is invalid please signup again"))
+      case _ => false
     }
   }
 

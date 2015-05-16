@@ -15,4 +15,5 @@ object PropsConsts {
   val REMOVE_FORCE_DEFAULT = 30
   val HOST_IP = "callback.ip"
   val DROPBOX_PATH = "dropbox.relative.path"
+  val GMT_DIFF = "gmt.diff"
 }

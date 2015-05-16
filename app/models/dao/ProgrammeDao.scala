@@ -125,4 +125,12 @@ object ProgrammeDao extends BaseDao{
     }
   }
 
+  def deleteFutureProgrammes(startFrom : Long) = {
+    transactional{
+      delete{
+        (entity: Programme) => where(entity.startTime :> startFrom)
+      }
+    }
+  }
+
 }

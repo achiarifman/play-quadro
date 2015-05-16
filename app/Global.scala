@@ -1,4 +1,5 @@
 import models.actors.Actors
+import models.dao.ProgrammeDao
 import models.message._
 import models.utils.{PropsConsts, QuartzScheduler}
 import play.api.Play.current
@@ -11,6 +12,7 @@ import play.api.libs.concurrent.Execution.Implicits._
  * Created by barcelona on 2/13/15.
  */
 object Global extends GlobalSettings{
+
 
   override def onStart(app: Application): Unit = {
     Logger.info("Application has started - quadro")
@@ -26,6 +28,8 @@ object Global extends GlobalSettings{
   }
 
   def scheduleEpgPuller(app: Application) = {
+
+    ProgrammeDao.deleteFutureProgrammes(System.currentTimeMillis())
     Logger.info("Scheduling the EPG puller")
     val epgSchedule = current.configuration.getString(PropsConsts.EPG_SCHEDULE)
     QuartzScheduler schedule("epg pull", pullEpg) at epgSchedule.getOrElse(PropsConsts.EPG_SCHEDULE_DEFAULT)

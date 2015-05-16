@@ -18,7 +18,6 @@ import models.QuadroPersistanceContext._
 class RecordingSchedulerActor extends Actor{
 
   val HOURS = 60000 * 60 * 4 // four hours
-  val GMT_DIFF = 60000 * 60 * 3
   val SAFE_TIME = 1000 * 60 * 5 // start 5 minutes earlier
   val recordActor = context.system.actorOf(Props[RecordActor])
   val calendar = Calendar.getInstance()

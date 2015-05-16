@@ -19,7 +19,7 @@ class DeleteVodActor extends Actor{
   val VOD_PATH = DROPBOX_PATH + "vods"
 
   override def receive: Receive = {
-    case message : DeleteVodMessage  =>  deleteVod(message.id)
+    case DeleteVodMessage(id)  =>  deleteVod(id)
   }
 
   def deleteVod(id : String) = {
